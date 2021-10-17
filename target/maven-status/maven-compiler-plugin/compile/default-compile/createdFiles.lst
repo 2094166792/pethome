@@ -1,0 +1,5 @@
+cn\zxh\org\mapper\DepartmentMapper.class
+cn\zxh\basic\PageList.class
+cn\zxh\org\query\DepartmentQuery.class
+cn\zxh\org\query\BasicpageQuery.class
+cn\zxh\org\domain\Department.class

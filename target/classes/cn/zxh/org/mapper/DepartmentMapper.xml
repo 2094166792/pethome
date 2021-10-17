@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.zxh.org.mapper.DepartmentMapper">
+    <insert id="add">
+        insert into
+            pethome.t_department(sn, name, dirPath, state, manager_id, parent_id)
+        values
+            (#{sn},#{name},#{dirPath},#{state},#{employee.id},#{parentId})
+    </insert>
+    <update id="update">
+        update
+            pethome.t_department
+        set
+            sn = #{sn},
+            name = #{name},
+            dirPath = #{dirPath},
+            state = #{state},
+            manager_id = #{employee.id},
+            parent_id = #{parentId}
+        where
+            id = #{id}
+    </update>
+
+
+    <delete id="del">
+        delete from pethome.t_department where id = #{id}
+    </delete>
+    <select id="findById" resultType="cn.zxh.org.domain.Department">
+        select *
+        from pethome.t_department
+        where id = #{id}
+    </select>
+    <select id="findAll" resultType="cn.zxh.org.domain.Department">
+        select *
+        from pethome.t_department
+    </select>
+    <select id="findAllByQuery" resultType="cn.zxh.org.domain.Department">
+        select * from pethome.t_department
+        <include refid="query"/>
+        limit #{begin},#{pageSize}
+    </select>
+    <select id="countByQuery" resultType="java.lang.Integer">
+        select count(id) from pethome.t_department
+        <include refid="query"/>
+    </select>
+
+    <sql id="query">
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and '' != name">
+                and name like concat("%",#{name},"%")
+            </if>
+        </where>
+    </sql>
+</mapper>
